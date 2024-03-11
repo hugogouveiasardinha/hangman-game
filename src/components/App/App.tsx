@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import './App.scss'
+import '../../styles/_reset.scss'
 
 interface CharacterData {
   id: number;
@@ -51,7 +52,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>hi {nameToGuess}</h1>
+      <div className="Container"><h1>hi {nameToGuess}</h1></div>
+      
       </div>
   );
 

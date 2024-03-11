@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import './App.scss'
+
 interface CharacterData {
   id: number;
   name: string;
@@ -48,8 +50,11 @@ function App() {
   }, []);
 
   return (
-    <h1>hi {nameToGuess}</h1>
+    <div className="App">
+      <h1>hi {nameToGuess}</h1>
+      </div>
   );
+
 }
 
 export default App;

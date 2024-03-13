@@ -1,0 +1,23 @@
+@use '../../styles/variables' as v;
+
+.Word {
+    display: flex;
+    justify-content: center;
+    gap: 0.25em;
+    font-size: 6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: monospace;
+}
+
+.Letter {
+    border-bottom: 0.1em solid v.$color-darkest;
+}
+
+.Letter span {
+    visibility: hidden;
+}
+
+.Letter span.visible {
+    visibility: visible;
+}

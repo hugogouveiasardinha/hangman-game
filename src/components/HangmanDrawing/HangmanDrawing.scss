@@ -10,20 +10,20 @@
 .Base-stick {
     height: 10px;
     width: 250px;
-    background-color: black;
+    background-color: v.$color-darkest;
 
 }
 
 .Pole-stick {
     height: 400px;
     width: 10px;
-    background-color: black;
+    background-color: v.$color-darkest;
 }
 
 .Top-stick {
     height: 10px;
     width: 200px;
-    background-color: black;
+    background-color: v.$color-darkest;
     margin-left: 191px;
 }
 
@@ -31,7 +31,7 @@
     position: absolute;
     height: 50px;
     width: 10px;
-    background-color: black;
+    background-color: v.$color-darkest;
     top: 0;
     right: 104px;
 
@@ -41,7 +41,7 @@
     width: 60px;
     height: 60px;
     border-radius: 100%;
-    border: 10px solid black;
+    border: 10px solid v.$color-darkest;
     position: absolute;
     top: 50px;
     right: 79px;
@@ -50,7 +50,7 @@
 .Body {
     width: 10px;
     height: 100px;
-    background-color: black;
+    background-color: v.$color-darkest;
     position: absolute;
     top: 110px;
     right: 104px;
@@ -59,7 +59,7 @@
 .Right-arm {
     width: 70px;
     height: 10px;
-    background-color: black;
+    background-color: v.$color-darkest;
     position: absolute;
     top: 140px;
     right: 34px;
@@ -70,7 +70,7 @@
 .Left-arm {
     width: 70px;
     height: 10px;
-    background-color: black;
+    background-color: v.$color-darkest;
     position: absolute;
     top: 140px;
     right: 114px;
@@ -81,7 +81,7 @@
 .Right-leg {
     width: 70px;
     height: 10px;
-    background-color: black;
+    background-color: v.$color-darkest;
     position: absolute;
     top: 200px;
     right: 44px;
@@ -92,7 +92,7 @@
 .Left-leg {
     width: 70px;
     height: 10px;
-    background-color: black;
+    background-color: v.$color-darkest;
     position: absolute;
     top: 200px;
     right: 104px;

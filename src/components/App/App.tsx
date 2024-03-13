@@ -4,6 +4,7 @@ import axios from "axios";
 import '../../styles/_reset.scss'
 import './App.scss'
 import { HangmanDrawing } from "../HangmanDrawing/HangmanDrawing";
+import { HangmanWord } from "../HangmanDrawing/HangmanWord";
 
 
 interface CharacterData {
@@ -57,6 +58,7 @@ function App() {
       <div className="Container">
         <div className="Message">Win Lose</div>
         <HangmanDrawing />
+        <HangmanWord />
       
       </div>
     </div>

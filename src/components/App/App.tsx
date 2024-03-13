@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import './App.scss'
 import '../../styles/_reset.scss'
+import './App.scss'
+import { HangmanDrawing } from "../HangmanDrawing/HangmanDrawing";
+
 
 interface CharacterData {
   id: number;
@@ -52,9 +54,12 @@ function App() {
 
   return (
     <div className="App">
-      <div className="Container"><h1>hi {nameToGuess}</h1></div>
+      <div className="Container">
+        <div className="Message">Win Lose</div>
+        <HangmanDrawing />
       
       </div>
+    </div>
   );
 
 }

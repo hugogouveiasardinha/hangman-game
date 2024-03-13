@@ -36,3 +36,66 @@
     right: 104px;
 
 }
+
+.Head {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    border: 10px solid black;
+    position: absolute;
+    top: 50px;
+    right: 79px;
+}
+
+.Body {
+    width: 10px;
+    height: 100px;
+    background-color: black;
+    position: absolute;
+    top: 110px;
+    right: 104px;
+}
+
+.Right-arm {
+    width: 70px;
+    height: 10px;
+    background-color: black;
+    position: absolute;
+    top: 140px;
+    right: 34px;
+    rotate: -30deg;
+    transform-origin: left bottom;
+}
+
+.Left-arm {
+    width: 70px;
+    height: 10px;
+    background-color: black;
+    position: absolute;
+    top: 140px;
+    right: 114px;
+    rotate: 30deg;
+    transform-origin: right bottom;
+}
+
+.Right-leg {
+    width: 70px;
+    height: 10px;
+    background-color: black;
+    position: absolute;
+    top: 200px;
+    right: 44px;
+    rotate: 60deg;
+    transform-origin: left bottom;
+}
+
+.Left-leg {
+    width: 70px;
+    height: 10px;
+    background-color: black;
+    position: absolute;
+    top: 200px;
+    right: 104px;
+    rotate: -60deg;
+    transform-origin: right bottom;
+}

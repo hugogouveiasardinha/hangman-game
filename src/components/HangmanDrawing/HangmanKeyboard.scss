@@ -1,0 +1,32 @@
+@use '../../styles/variables' as v;
+
+.Keyboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    gap: 0.5rem;
+}
+
+.Key {
+    width: 100%;
+    border:3px solid v.$color-darkest;
+    background: none;
+    aspect-ratio: 1 / 1;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.Key.active{
+background-color: v.$color-active;
+color: v.$color-lightest;
+}
+
+.Key.inactive {
+    opacity: 0.4;
+}
+
+.Key:hover, .Key:focus {
+    background-color: v.$color-hover;
+}

@@ -5,6 +5,7 @@ import '../../styles/_reset.scss'
 import './App.scss'
 import { HangmanDrawing } from "../HangmanDrawing/HangmanDrawing";
 import { HangmanWord } from "../HangmanDrawing/HangmanWord";
+import { HangmanKeyboard } from "../HangmanDrawing/HangmanKeyboard";
 
 
 interface CharacterData {
@@ -59,7 +60,7 @@ function App() {
         <div className="Message">Win Lose</div>
         <HangmanDrawing />
         <HangmanWord />
-      
+        <HangmanKeyboard />
       </div>
     </div>
   );

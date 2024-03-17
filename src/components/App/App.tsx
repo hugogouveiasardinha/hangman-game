@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
 import '../../styles/_reset.scss'
@@ -21,7 +21,13 @@ function App() {
 
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
 
-  const incorrectLetters = guessedLetters.filter(letter => !nameToGuess.includes(letter))
+  const incorrectLetters = guessedLetters.filter(letter => !nameToGuess.toLowerCase().includes(letter.toLowerCase()))
+
+  const addGuessedLetter = useCallback((letter: string) => {
+if(guessedLetters.includes(letter)) return
+
+    setGuessedLetters(currentLetters => [...currentLetters, letter])
+  }, [guessedLetters])
 
   useEffect(() => {
     // Vérification si le composant est monté
@@ -29,7 +35,7 @@ function App() {
 
     const generateRandomNumber = () => Math.floor(Math.random() * 83) + 1;
     const randomNumber = generateRandomNumber();
-    console.log(randomNumber);
+
 
     const fetchData = async () => {
       try {
@@ -42,8 +48,10 @@ function App() {
         if (isMounted) {
           // Si le composant est toujours monté, effectuer les mises à jour nécessaires
           const characterName = response.data.name;
-          console.log(response.data);
-          setNameToGuess(characterName);
+
+          setNameToGuess(characterName.toLowerCase());
+  
+          
         }
       } catch (error) {
         console.error('Erreur lors de la requête API:', error.message);
@@ -57,13 +65,30 @@ function App() {
     };
   }, []);
 
+  useEffect(() => { 
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key
+      if (!key.match(/^[a-zA-Z.]$/)) return
+      e.preventDefault()
+      addGuessedLetter(key)
+
+    
+    }
+
+    document.addEventListener("keypress", handler)
+
+    return () => {
+      document.removeEventListener("keypress", handler)
+    }
+   }, [guessedLetters]);
+
   return (
     <div className="App">
       <div className="Container">
         <div className="Message">Win Lose</div>
         <HangmanDrawing numberOfGuesses={incorrectLetters.length}/>
         <HangmanWord guessedLetters={guessedLetters} nameToGuess={nameToGuess}/>
-        <HangmanKeyboard />
+        <HangmanKeyboard onKeyPress={addGuessedLetter}/>
       </div>
     </div>
   );

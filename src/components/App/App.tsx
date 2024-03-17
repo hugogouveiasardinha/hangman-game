@@ -18,7 +18,10 @@ interface CharacterData {
 
 function App() {
   const [nameToGuess, setNameToGuess] = useState('');
+
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
+
+  const incorrectLetters = guessedLetters.filter(letter => !nameToGuess.includes(letter))
 
   useEffect(() => {
     // Vérification si le composant est monté
@@ -58,8 +61,8 @@ function App() {
     <div className="App">
       <div className="Container">
         <div className="Message">Win Lose</div>
-        <HangmanDrawing />
-        <HangmanWord />
+        <HangmanDrawing numberOfGuesses={incorrectLetters.length}/>
+        <HangmanWord guessedLetters={guessedLetters} nameToGuess={nameToGuess}/>
         <HangmanKeyboard />
       </div>
     </div>

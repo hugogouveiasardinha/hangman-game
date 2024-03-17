@@ -24,15 +24,16 @@ const leftLeg = (
     <div className="Left-leg" />
 );
 
-export function HangmanDrawing() {
+const bodyParts = [head, body, rightArm, leftArm, rightLeg, leftLeg]
+
+type HangmanDrawingProps = {
+    numberOfGuesses: number
+}
+
+export function HangmanDrawing({ numberOfGuesses }: HangmanDrawingProps) {
     return (
         <div className="Drawing">
-            {head}
-            {body}
-            {rightArm}
-            {leftArm}
-            {rightLeg}
-            {leftLeg}
+            {bodyParts.slice(0, numberOfGuesses)}
             <div className="Hang-stick" />
             <div className="Top-stick" />
             <div className="Pole-stick" />

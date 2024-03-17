@@ -27,6 +27,8 @@ color: v.$color-lightest;
     opacity: 0.4;
 }
 
-.Key:hover, .Key:focus {
+.Key:hover:not(:disabled), 
+.Key:focus:not(:disabled) {
     background-color: v.$color-hover;
 }
+

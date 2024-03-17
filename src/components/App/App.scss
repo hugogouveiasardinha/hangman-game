@@ -1,63 +1,62 @@
 @use '../../styles/variables' as v;
 
 .App {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    min-height: 100vh;
-    font-family: v.$font;
-    color: v.$color-alt;
-  
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('../../assets/images/background.jpg');
-      opacity: 0.4;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: -1; // Assure que le pseudo-élément est derrière le contenu de l'élément principal
-    }
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  min-height: 100vh;
+  font-family: v.$font;
+  //color: v.$color-alt;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/images/background.jpg');
+    opacity: 0.4;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; // Assure que le pseudo-élément est derrière le contenu de l'élément principal
   }
+}
 
-  .Container {
-    position: relative;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    gap: v.$gutter*2;
-    margin: 0 auto;
-    width: 50%;
-    height: 60vh;
+.Container {
+  position: relative;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  gap: v.$gutter*2;
+  margin: 0 auto;
+  width: 50%;
+  height: 55vh;
 
-    &::before {
+  &::before {
 
-         border-radius: 10px;
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: v.$color-lightest;
-      opacity: 0.5;
-    
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: -1; // Assure que le pseudo-élément est derrière le contenu de l'élément principal
+    border-radius: 10px;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: v.$color-lightest;
+    opacity: 0.5;
 
-    }
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; // Assure que le pseudo-élément est derrière le contenu de l'élément principal
+
   }
+}
 
-  .Message {
-    font-size: v.$gutter*2;
-    font-family: v.$font;
-  }
-
+.Message {
+  font-size: v.$gutter*2;
+  font-family: v.$font;
+}

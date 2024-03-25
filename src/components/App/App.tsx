@@ -24,7 +24,7 @@ function App() {
   const incorrectLetters = guessedLetters.filter(letter => !nameToGuess.toLowerCase().includes(letter.toLowerCase()))
 
   const addGuessedLetter = useCallback((letter: string) => {
-if(guessedLetters.includes(letter)) return
+    if (guessedLetters.includes(letter)) return
 
     setGuessedLetters(currentLetters => [...currentLetters, letter])
   }, [guessedLetters])
@@ -50,8 +50,8 @@ if(guessedLetters.includes(letter)) return
           const characterName = response.data.name;
 
           setNameToGuess(characterName.toLowerCase());
-  
-          
+
+
         }
       } catch (error) {
         console.error('Erreur lors de la requête API:', error.message);
@@ -65,14 +65,14 @@ if(guessedLetters.includes(letter)) return
     };
   }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const key = e.key
       if (!key.match(/^[a-zA-Z.]$/)) return
       e.preventDefault()
       addGuessedLetter(key)
 
-    
+
     }
 
     document.addEventListener("keypress", handler)
@@ -80,15 +80,18 @@ if(guessedLetters.includes(letter)) return
     return () => {
       document.removeEventListener("keypress", handler)
     }
-   }, [guessedLetters]);
+  }, [guessedLetters]);
 
   return (
     <div className="App">
       <div className="Container">
         <div className="Message">Win Lose</div>
-        <HangmanDrawing numberOfGuesses={incorrectLetters.length}/>
-        <HangmanWord guessedLetters={guessedLetters} nameToGuess={nameToGuess}/>
-        <HangmanKeyboard onKeyPress={addGuessedLetter}/>
+        <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
+        <HangmanWord guessedLetters={guessedLetters} nameToGuess={nameToGuess} />
+        <HangmanKeyboard
+          activeLetters={guessedLetters.filter(letter => nameToGuess.includes(letter))}
+          inactiveLetters={incorrectLetters}
+          addGuessedLetter={addGuessedLetter} />
       </div>
     </div>
   );

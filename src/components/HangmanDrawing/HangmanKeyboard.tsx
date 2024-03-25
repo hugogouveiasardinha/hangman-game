@@ -3,19 +3,26 @@ import './HangmanKeyboard.scss'
 const keys = Array.from({ length: 26 }, (_, index) => String.fromCharCode(97 + index));
 
 interface HangmanKeyboardProps {
-    onKeyPress: (key: string) => void;
+    activeLetters: string[]
+    inactiveLetters: string[]
+    addGuessedLetter: (letter:string) => void
+
 }
 
-export function HangmanKeyboard({onKeyPress}: HangmanKeyboardProps) {
+export function HangmanKeyboard({activeLetters, inactiveLetters, addGuessedLetter, onKeyPress}: HangmanKeyboardProps) {
 
-    const handleKeyPress = (key: string) => {
-        onKeyPress(key)
-    }
+  
     return (
     <div className="Keyboard">
         {keys.map(key => {
+            const isActive = activeLetters.includes(key)
+            const isInactive = inactiveLetters.includes(key)
             return (
-                <button className="Key" onClick={() => handleKeyPress(key)}>{key}</button>
+                <button 
+                onClick={() => addGuessedLetter(key)} 
+                className={`Key ${isActive ? 'active' : ''} ${isInactive ? 'inactive' : ''}`}
+                disabled={isInactive || isActive}
+                >{key}</button>
             )
         })}
     </div>

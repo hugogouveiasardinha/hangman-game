@@ -18,24 +18,26 @@ interface CharacterData {
 
 function App() {
   const [nameToGuess, setNameToGuess] = useState('');
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  const [showWinnerMessage, setShowWinnerMessage] = useState(false); // Nouvelle variable d'état
+  const [isLoading, setIsLoading] = useState(true); // Nouvelle variable d'état pour indiquer si les données sont en cours de chargement
 
-  const [guessedLetters, setGuessedLetters] = useState<string[]>([])
-
-  const incorrectLetters = guessedLetters.filter(letter => !nameToGuess.toLowerCase().includes(letter.toLowerCase()))
+  const incorrectLetters = guessedLetters.filter(letter => !nameToGuess.toLowerCase().includes(letter.toLowerCase()));
+  const isLoser = incorrectLetters.length >= 6;
+  const isWinner = nameToGuess.split('').every(letter => guessedLetters.includes(letter.toLowerCase()));
 
   const addGuessedLetter = useCallback((letter: string) => {
-    if (guessedLetters.includes(letter)) return
+    if (guessedLetters.includes(letter) || isLoser || isWinner)
+      return;
 
-    setGuessedLetters(currentLetters => [...currentLetters, letter])
-  }, [guessedLetters])
+    setGuessedLetters(currentLetters => [...currentLetters, letter]);
+  }, [guessedLetters, isWinner, isLoser]);
 
   useEffect(() => {
-    // Vérification si le composant est monté
     let isMounted = true;
 
     const generateRandomNumber = () => Math.floor(Math.random() * 83) + 1;
     const randomNumber = generateRandomNumber();
-
 
     const fetchData = async () => {
       try {
@@ -46,12 +48,9 @@ function App() {
         });
 
         if (isMounted) {
-          // Si le composant est toujours monté, effectuer les mises à jour nécessaires
           const characterName = response.data.name;
-
           setNameToGuess(characterName.toLowerCase());
-
-
+          setIsLoading(false); // Mettre isLoading à false une fois que les données ont été récupérées
         }
       } catch (error) {
         console.error('Erreur lors de la requête API:', error.message);
@@ -67,35 +66,44 @@ function App() {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      const key = e.key
-      if (!key.match(/^[a-zA-Z.]$/)) return
-      e.preventDefault()
-      addGuessedLetter(key)
+      const key = e.key;
+      if (!key.match(/^[a-zA-Z.]$/)) return;
+      e.preventDefault();
+      addGuessedLetter(key);
+    };
 
-
-    }
-
-    document.addEventListener("keypress", handler)
+    document.addEventListener("keypress", handler);
 
     return () => {
-      document.removeEventListener("keypress", handler)
+      document.removeEventListener("keypress", handler);
+    };
+  }, [guessedLetters, addGuessedLetter]);
+
+  useEffect(() => {
+    if (isWinner && !showWinnerMessage && !isLoading) {
+      // Afficher le message de victoire uniquement si le joueur a gagné, que le message n'a pas déjà été affiché et que les données ne sont plus en cours de chargement
+      setShowWinnerMessage(true);
     }
-  }, [guessedLetters]);
+  }, [isWinner, showWinnerMessage, isLoading]);
 
   return (
     <div className="App">
       <div className="Container">
-        <div className="Message">Win Lose</div>
+        <div className="Message">
+          {showWinnerMessage && "You just won a Dundie! Refresh to play again!"}
+          {isLoser && "Goodbye Toby, it's been fine, hope you find your, paraadiisee! Refresh to play again!"}
+        </div>
         <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
         <HangmanWord guessedLetters={guessedLetters} nameToGuess={nameToGuess} />
         <HangmanKeyboard
+          disabled={isWinner || isLoser}
           activeLetters={guessedLetters.filter(letter => nameToGuess.includes(letter))}
           inactiveLetters={incorrectLetters}
-          addGuessedLetter={addGuessedLetter} />
+          addGuessedLetter={addGuessedLetter}
+        />
       </div>
     </div>
   );
-
 }
 
 export default App;
